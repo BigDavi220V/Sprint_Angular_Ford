@@ -1,0 +1,131 @@
+/* Importação de uma fonte moderna (opcional, mas recomendado) */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* Estilos de fundo e corpo */
+body {
+    /* Fundo com tema de fumaça azul/velocidade, usando a imagem Gemini_version2.jpg */
+    background-image: url('/ArquivosDeSuporteDesafioAngular/img/plano_de_fundo.jpeg'); 
+    background-size: cover;
+    background-position: center;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
+
+
+/* Container Principal do Formulário */
+.auth-conteiner {
+    /* Fundo semi-transparente para o conteúdo */
+    background: rgba(255, 255, 255, 0.1); 
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.329); /* Sombra forte para destaque */
+    backdrop-filter: blur(8px); /* Efeito de vidro fosco */
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    width: 100%;
+    max-width: 700px;
+    color: #ffffff; /* Texto branco */
+    text-align: center;
+    position: relative;
+    /* Adiciona a imagem do Mustang de forma sutil no fundo do container */
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.397), rgba(0, 0, 0, 0.3)), url('/assets/ford\ mustang.avif');
+    background-size: cover;
+    background-position: 50% 60%; 
+    background-repeat: no-repeat;
+}
+
+/* Título */
+.auth-conteiner h2 {
+    font-size: 2em;
+    margin-bottom: 25px;
+    color: #4A90E2; /* Azul vibrante */
+    text-shadow: 0 0 10px #4A90E2;
+}
+
+/* Formulário e Elementos de Entrada */
+.auth-conteiner form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.auth-conteiner label {
+    font-weight: 700;
+    margin-top: 5px;
+    color: #f0f0f0;
+}
+
+.auth-conteiner input {
+    width: 100%;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.9); /* Fundo claro para o input */
+    color: #333;
+    font-size: 1em;
+    box-sizing: border-box; /* Inclui padding e border na largura total */
+    transition: all 0.3s ease;
+}
+
+.auth-conteiner input:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px #4A90E2; /* Foco com cor de destaque */
+}
+
+/* Botão de Envio (Entrar/Cadastrar) */
+.auth-conteiner button[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #4A90E2; /* Azul principal */
+    color: #fff;
+    font-size: 1.1em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.auth-conteiner button[type="submit"]:hover {
+    background-color: #357ABD; /* Azul mais escuro no hover */
+}
+
+.auth-conteiner button[type="submit"]:active {
+    transform: scale(0.98);
+}
+
+/* Seção de Toggle (Já tem conta? / Não tem conta?) */
+.auth-conteiner p {
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: #cccccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Botão de Toggle (Criar conta / Fazer login) */
+.auth-conteiner p button {
+    background: none;
+    border: none;
+    color: #4A90E2;
+    font-size: 1em;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.auth-conteiner p button:hover {
+    color: #ffffff;
+}
