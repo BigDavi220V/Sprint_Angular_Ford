@@ -3,71 +3,94 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-// Importa o Service, e com ele, as Interfaces definidas no Service
+import { Router } from '@angular/router';
 import { 
   VehicleService, 
   ModelSummary, 
   ModelData, 
   VehicleDetail 
-} from '../../service/vehicle.service';
+} from '../../service/vehicle.service'
+
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  // 💡 IMPORTS ESSENCIAIS: FormsModule para [(ngModel)] e CommonModule para *ngFor, *ngIf.
+  imports: [FormsModule, CommonModule], 
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
 
-  // Tipagem corrigida
+  // Propriedades tipadas corretamente
   models: ModelSummary[] = [];
   selectedModel: string = '';
-  // Tipagem corrigida. Pode ser null antes do carregamento
   modelData: ModelData | null = null; 
 
   searchCodeInput: string = '';
-  // Tipagem corrigida. Pode ser null antes da busca ou se não encontrar
   vehicleDetail: VehicleDetail | null = null; 
-
-  constructor(private api: VehicleService) {}
+  
+  // Injeção do Service e Router
+  constructor(private api: VehicleService, private router: Router) {}
 
   ngOnInit() {
     this.loadModels();
   }
 
   loadModels() {
-    // Tipagem inferida corretamente a partir do Service
-    this.api.getModels().subscribe(res => {
-      this.models = res;
+    this.api.getModels().subscribe({
+      next: (res) => {
+        // 💡 Lógica correta para o Dropdown: Mapeia o array 'vehicles' do objeto de resposta
+        this.models = res.vehicles.map(v => ({ model: v.model_name }));
+      },
+      error: (err) => {
+        console.error("Erro ao carregar modelos:", err);
+      }
     });
   }
 
+  // Método chamado quando o modelo no dropdown muda
   changeModel() {
-    // Melhoria de UX: limpa a busca de VIN ao mudar o modelo
     this.vehicleDetail = null; 
     this.searchCodeInput = '';
 
     if (!this.selectedModel) {
-      this.modelData = null; // Limpa os cards se "Selecione..." for escolhido
+      this.modelData = null; 
       return;
     }
 
-    // Tipagem inferida corretamente a partir do Service
-    this.api.getVehicleData(this.selectedModel).subscribe(res => {
-      this.modelData = res;
+    this.api.getVehicleData(this.selectedModel).subscribe({
+      next: (res) => {
+         // O service já corrigiu o caminho da imagem
+        this.modelData = res;
+      },
+       error: (err) => {
+        console.error(`Erro ao carregar dados do modelo ${this.selectedModel}:`, err);
+        this.modelData = null;
+      }
     });
   }
 
+  // Método chamado ao clicar em "Buscar" VIN
   searchCode() {
-    // Limpa o detalhe do veículo antes de buscar (melhor UX)
     this.vehicleDetail = null; 
 
     if (!this.searchCodeInput.trim()) return;
 
-    // Tipagem inferida corretamente a partir do Service
-    this.api.searchVehicle(this.searchCodeInput).subscribe((res): void => {
-      this.vehicleDetail = res;
+    this.api.searchVehicle(this.searchCodeInput).subscribe({
+      next: (res) => {
+        this.vehicleDetail = res;
+      },
+      error: (err) => {
+        console.error("Erro ao buscar VIN:", err);
+        this.vehicleDetail = null;
+      }
     });
+  }
+  
+  // Método de Logout implementado
+  Logout(): void{
+    localStorage.removeItem('usuarioLogado'); 
+    this.router.navigate(['/']);
   }
 }
