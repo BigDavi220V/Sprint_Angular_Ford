@@ -1,118 +1,108 @@
-/* home.component.css */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+.welcome-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  /* Fundo ocupando toda a tela */
+  background: url('/ArquivosDeSuporteDesafioAngular/img/plano_de_fundo.jpeg') no-repeat center center/cover;
+  
+  /* CENTRALIZAÇÃO HORIZONTAL E VERTICAL */
+  display: flex;
+  align-items: center; /* Centraliza verticalmente */
+  justify-content: center; /* Centraliza horizontalmente */
+  gap: 80px; /* Adiciona espaçamento entre o conteúdo e o carro */
 
-/* Passo 6: Fundo da Página (usando o tema de fumaça azul ou um fundo simples) */
-.home-container {
-    /* Usando o fundo de fumaça azul (Gemini_version2.jpg) para o corpo da página */
-    background-image: url('/ArquivosDeSuporteDesafioAngular/img/plano_de_fundo.jpeg'); 
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    min-height: 100vh;
-    display: flex;
+  padding: 0 40px; /* Remove o padding grande e centraliza */
+  box-sizing: border-box;
+  color: #fff;
+}
+
+/* LOGO FORD (MANTÉM O POSICIONAMENTO ABSOLUTO NOS CANTOS) */
+.logo {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  width: 160px;
+}
+
+/* TEXTO CENTRAL */
+.content {
+  max-width: 400px; /* Reduzi o max-width para dar mais espaço de centralização */
+  text-align: left;
+}
+
+h1 {
+  font-size: 48px;
+  margin: 0 0 10px 0;
+  font-weight: bold;
+}
+
+p {
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+/* BOTÕES */
+.buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.btn {
+  padding: 14px 32px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.25s ease;
+  font-weight: bold;
+}
+
+.primary {
+  background: #00a8ff;
+  color: white;
+}
+
+.primary:hover {
+  background: #0092dd;
+}
+
+.secondary {
+  background: rgba(255,255,255,0.15);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.4);
+}
+
+.secondary:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+/* IMAGEM DO VEÍCULO */
+.car-image {
+  width: 520px;
+  height: auto;
+  user-select: none;
+}
+
+/* RESPONSIVO (Ajustado para centralizar e empilhar em telas menores) */
+@media (max-width: 1024px) {
+  .welcome-container {
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    font-family: 'Roboto', sans-serif;
-    color: #fff;
-    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
-}
-
-/* Passo 4: Cartão de Boas-Vindas com o Carro no Fundo */
-.welcome-card {
-    /* 1. Aplica a imagem do carro como fundo do cartão */
-    background-image: url('/ArquivosDeSuporteDesafioAngular/img/ranger.png'); 
-    background-size: cover;
-    background-position: center; /* Ajuste para o carro aparecer bem no cartão */
-    background-repeat: no-repeat;
-    
-    border-radius: 12px;
-    padding: 40px 30px;
-    margin-bottom: 30px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.9);
     text-align: center;
-    max-width: 900px;
-    width:40%;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    
-    /* 2. Adiciona uma camada escura semi-transparente sobre o carro para legibilidade */
-    position: relative;
-    z-index: 1; /* Garante que o conteúdo fique acima da camada escura */
-}
+    padding: 40px;
+    gap: 30px; /* Reduz o espaçamento no modo coluna */
+  }
 
-/* Camada escura/gradiente sobre o fundo do carro DENTRO do cartão */
-.welcome-card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* Gradiente sutil do preto transparente para o preto mais sólido */
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8));
-    border-radius: 12px;
-    z-index: -1; 
-}
+  .content {
+    max-width: 100%;
+  }
 
-/* Estilos de Texto DENTRO do Cartão */
-.welcome-card h2 {
-    font-size: 2.8em;
-    margin-bottom: 20px;
-    color: #4A90E2;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-weight: 700;
-    text-shadow: 0 0 10px #4A90E2; /* Brilho no título */
-}
+  /* Centraliza botões em telas menores */
+  .buttons {
+    justify-content: center; 
+  }
 
-.welcome-card p {
-    font-size: 1.2em;
-    line-height: 1.6;
-    margin-bottom: 15px;
-    color: #f0f0f0;
-}
-
-/* Área de Navegação (Botões) */
-.navigation-area {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-/* Estilos de Botão */
-.action-button {
-    padding: 15px 30px;
-    border: none;
-    border-radius: 8px;
-    font-size: 1.1em;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
-    text-decoration: none;
-    display: inline-block;
-}
-
-/* Passo 7: Botão Dashboard */
-.dashboard-link .action-button {
-    background-color: #4A90E2;
-    color: #fff;
-}
-
-.dashboard-link .action-button:hover {
-    background-color: #357ABD;
-    transform: translateY(-3px) scale(1.02);
-}
-
-/* Passo 5: Botão Logout */
-.logout-button {
-    background-color: #d9534f;
-    color: #fff;
-}
-
-.logout-button:hover {
-    background-color: #c9302c;
-    transform: translateY(-3px) scale(1.02);
+  .car-image {
+    margin-top: 0; /* Remove a margem superior desnecessária no modo coluna */
+    width: 380px;
+  }
 }

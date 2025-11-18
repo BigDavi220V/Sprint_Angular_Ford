@@ -1,0 +1,82 @@
+<p>dashboard works!</p>
+<div class="dashboard-container">
+
+  <div class="top-bar">
+    <img src="/ArquivosDeSuporteDesafioAngular/img/ford.png" class="logo"/>
+    <button class="logout">Logout</button>
+  </div>
+
+  <div class="dashboard-box">
+
+    <h2>Dashboard FORD</h2>
+
+    <!-- CARD 1 – MODELOS -->
+    <div class="card-row">
+
+      <div class="card search-card">
+        <label>Veículo</label>
+        <select [(ngModel)]="selectedModel" (change)="changeModel()">
+          <option value="">Selecione...</option>
+          <option *ngFor="let m of models" [value]="m.model">{{ m.model }}</option>
+        </select>
+      </div>
+
+      <!-- CARD 2 – TOTAL VENDAS -->
+      <div class="card">
+        <h3>Total de vendas</h3>
+        <p>{{ modelData?.totalSales || 0 }}</p>
+      </div>
+
+      <!-- CARD 3 – CONECTADOS -->
+      <div class="card">
+        <h3>Conectados</h3>
+        <p>{{ modelData?.connected || 0 }}</p>
+      </div>
+
+      <!-- CARD 4 – UPDATE SOFTWARE -->
+      <div class="card">
+        <h3>Update Software</h3>
+        <p>{{ modelData?.updated || 0 }}</p>
+      </div>
+
+    </div>
+
+    <!-- IMAGEM DO MODELO -->
+    <div class="vehicle-img-box">
+      <img *ngIf="modelData" [src]="modelData.image" class="vehicle-img"/>
+    </div>
+
+    <!-- TABELA -->
+    <div class="table-card">
+      <div class="search-table">
+        <input placeholder="Buscar por código..." [(ngModel)]="searchCodeInput"/>
+        <button (click)="searchCode()">Buscar</button>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Código VIN</th>
+            <th>Odômetro</th>
+            <th>Status</th>
+            <th>Lat</th>
+            <th>Long</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngIf="vehicleDetail">
+            <td>{{ vehicleDetail.code }}</td>
+            <td>{{ vehicleDetail.odometer }}</td>
+            <td>{{ vehicleDetail.status }}</td>
+            <td>{{ vehicleDetail.lat }}</td>
+            <td>{{ vehicleDetail.long }}</td>
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
+
+  </div>
+
+</div>

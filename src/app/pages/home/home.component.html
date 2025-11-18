@@ -1,15 +1,17 @@
-<div class="home-container">
-    <div class="welcome-card">
-        <h2>Bem-vindo ao Sistema Ford!</h2>
-        <p>Explore as funcionalidades exclusivas para proprietários Ford e apaixonados por carros.</p>
-        <p>Sua jornada começa aqui.</p>
-    </div>
+<div class="welcome-container">
 
-    <div class="navigation-area">
-        <a routerLink="/dashboard" class="dashboard-link">
-            <button class="action-button">Ir para Dashboard</button>
-        </a>
-        
-        <button (click)="onLogout()" class="logout-button action-button">Sair</button>
+  <img src="/ArquivosDeSuporteDesafioAngular/img/ford.png" class="logo" />
+
+  <div class="content">
+    <h1>Welcome to My Ford</h1>
+    <p>Your personalized experience awaits.</p>
+
+    <div class="buttons">
+      <button class="btn primary" (click)="goToDashboard()">GO TO DASHBOARD</button>
+      <button class="btn secondary" (click)="logout()">LOGOUT</button>
     </div>
+  </div>
+
+  <img src="/assets/BRONCO.webp" class="car-image" />
+
 </div>
