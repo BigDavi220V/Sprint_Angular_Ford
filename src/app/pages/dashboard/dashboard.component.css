@@ -4,19 +4,18 @@
 
 :host {
     font-family: 'Inter', sans-serif;
-    display: block; /* Garante que o componente ocupe todo o espaço */
+    display: block;
 }
 
 /* 2. LAYOUT PRINCIPAL */
 .dashboard-container {
     width: 100%;
-    min-height: 100vh; /* Usa min-height para acomodar conteúdo longo */
+    min-height: 100vh;
     background: url('/ArquivosDeSuporteDesafioAngular/img/plano_de_fundo.jpeg') no-repeat center center/cover;
     padding: 20px;
     box-sizing: border-box;
     color: #ffffff;
-    /* Adiciona um overlay sutil para escurecer o fundo e aumentar o contraste */
-    background-color: rgba(0, 0, 0, 0.4); 
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 /* Barra Superior */
@@ -28,7 +27,7 @@
 }
 
 .logo {
-    width: 120px; /* Reduzido levemente o logo para telas menores */
+    width: 120px;
     height: auto;
 }
 
@@ -45,16 +44,16 @@
 }
 
 .logout:hover {
-    background: #4A90E2; /* Azul de destaque ao passar o mouse */
+    background: #4A90E2;
     border-color: #4A90E2;
 }
 
 /* Caixa do Dashboard (Conteúdo Central) */
 .dashboard-box {
-    width: 95%; /* Maior largura para melhor uso do espaço */
+    width: 95%;
     max-width: 1200px;
     margin: 30px auto;
-    background: rgba(0, 0, 0, 0.65); /* Fundo mais opaco */
+    background: rgba(0, 0, 0, 0.65);
     padding: 30px;
     border-radius: 20px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
@@ -64,7 +63,7 @@
     font-size: 28px;
     font-weight: 700;
     margin-bottom: 30px;
-    color: #4A90E2; /* Título em azul para destaque */
+    color: #4A90E2;
     text-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
 }
 
@@ -72,23 +71,23 @@
 
 .card-row {
     display: flex;
-    gap: 15px; /* Espaçamento menor para caber mais */
+    gap: 15px;
     margin-bottom: 25px;
-    flex-wrap: wrap; /* ESSENCIAL para responsividade */
+    flex-wrap: wrap;
 }
 
 .card {
-    background: rgba(255, 255, 255, 0.15); /* Um pouco mais claro */
+    background: rgba(255, 255, 255, 0.15);
     padding: 20px;
     border-radius: 12px;
-    flex: 1 1 200px; /* Permite que o card encolha até 200px ou cresça */
+    flex: 1 1 200px;
     text-align: center;
     border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .search-card {
-    flex: 1 1 300px; /* Card de busca um pouco maior */
+    flex: 1 1 300px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -125,29 +124,38 @@
     color: #fff;
     font-size: 15px;
     box-sizing: border-box;
-    appearance: none; /* Remove estilo nativo do select */
+    appearance: none;
 }
 
 .search-card select:focus,
 .search-table input:focus {
     outline: none;
-    border-color: #4A90E2; /* Destaque no foco */
+    border-color: #4A90E2;
     box-shadow: 0 0 5px #4A90E2;
 }
 
-/* 5. IMAGEM DO VEÍCULO */
+/* 5. IMAGEM DO VEÍCULO - MODIFICADO PARA ALTURA FIXA */
 
 .vehicle-img-box {
     text-align: center;
-    margin: 20px 0;
+    margin: 20px auto; /* Centraliza o contêiner da imagem */
     padding: 10px;
+    /* >>> MODIFICAÇÕES AQUI: Define uma altura fixa para o contêiner */
+    width: 100%;
+    max-width: 470px; /* Mantém uma largura máxima (450px + padding) */
+    height: 250px; /* ALTURA FIXA */
+    /* FIM DAS MODIFICAÇÕES */
 }
 
 .vehicle-img {
+    /* Ajusta a imagem para preencher o contêiner fixo */
     width: 100%;
-    max-width: 450px; /* Aumento da imagem no desktop */
-    height: auto;
-    filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.9)); /* Sombra mais intensa */
+    height: 100%;
+    max-width: none; /* Deixa o contêiner definir a largura máxima */
+    /* ESSENCIAL: Garante que a imagem se ajuste ao contêiner, mantendo o aspecto */
+    object-fit: contain; 
+    
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5)); /* Sombra ajustada */
     transition: transform 0.3s ease;
 }
 
@@ -159,7 +167,7 @@
 
 .table-card {
     margin-top: 30px;
-    overflow-x: auto; /* Permite rolagem horizontal em telas muito pequenas */
+    overflow-x: auto;
 }
 
 .search-table {
@@ -194,7 +202,7 @@ table {
     background: rgba(255, 255, 255, 0.08);
     border-radius: 8px;
     overflow: hidden;
-    min-width: 600px; /* Garante que não fique muito espremida em telas médias */
+    min-width: 600px;
 }
 
 th, td {
@@ -204,7 +212,7 @@ th, td {
 }
 
 th {
-    background: rgba(74, 144, 226, 0.2); /* Azul sutil no cabeçalho */
+    background: rgba(74, 144, 226, 0.2);
     font-weight: 600;
     color: #4A90E2;
     text-transform: uppercase;
@@ -225,20 +233,25 @@ tbody tr:last-child td {
     }
 
     .card-row {
-        flex-direction: column; /* Empilha os cards */
+        flex-direction: column;
         gap: 15px;
     }
 
     .card, .search-card {
-        flex: 1 1 100%; /* Faz com que todos os cards ocupem 100% da largura */
+        flex: 1 1 100%;
     }
-
-    .vehicle-img {
-        max-width: 300px; /* Limita a imagem para não estourar em mobile */
+    
+    /* >>> MODIFICAÇÕES AQUI: Altura fixa para o contêiner da imagem em mobile */
+    .vehicle-img-box {
+        max-width: 320px; /* Largura máxima menor para mobile */
+        height: 180px; /* ALTURA FIXA MENOR PARA MOBILE */
     }
+    
+    /* Remove a regra redundante, pois o .vehicle-img já é 100% da altura e largura */
+    /* .vehicle-img { max-width: 300px; } */ 
 
     .search-table {
-        flex-direction: column; /* Empilha input e botão de busca */
+        flex-direction: column;
     }
 
     .search-table button {
