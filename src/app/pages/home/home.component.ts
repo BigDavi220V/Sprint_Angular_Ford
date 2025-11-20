@@ -17,6 +17,7 @@ export class HomeComponent  {
 
   logout() {
     // coloque seu fluxo real de logout aqui
+    localStorage.removeItem('usuarioLogado'); 
     this.router.navigate(['/']);
   }
 }
