@@ -88,6 +88,6 @@ export class DashboardComponent implements OnInit {
   
   Logout(): void{
     localStorage.removeItem('usuarioLogado'); 
-    this.router.navigate(['/login']); // Certifique-se que a rota é '/login'
+    this.router.navigate(['/']); // Certifique-se que a rota é '/login'
   }
 }
