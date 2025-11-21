@@ -3,87 +3,72 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'; 
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators'; // 💡 Importação necessária para o operador map
+import { map } from 'rxjs/operators';
 
 // ======================================================================
-// DEFINIÇÃO DAS INTERFACES DE DADOS
+// INTERFACES (Adaptadas ao retorno REAL da sua API)
 // ======================================================================
 
-// 1. O que é retornado na lista de modelos para o Dropdown
-export interface ModelSummary {
-  model: string;
-}
-
-// 2. O que é retornado para os Cards e Imagem (GET /vehicle/:model)
-export interface ModelData {
-  model: string;
-  totalSales: number;
+// Interface crua do objeto que vem da API na rota /vehicles
+export interface ApiVehicle {
+  id: number;
+  vehicle: string;
+  volumetotal: number;
   connected: number;
-  updated: number;
-  image: string; // Agora armazena a URL completa
+  softwareUpdates: number;
+  img: string;
 }
 
-// 3. O que é retornado para a Tabela (POST /vehicleData)
+export interface VehicleListResponse {
+  vehicles: ApiVehicle[];
+}
+
+// Interface para os dados do VIN (Rota /vehicleData)
 export interface VehicleDetail {
-  code: string;
-  odometer: number;
+  id: number;
+  odometro: number;
+  nivelCombustivel: number;
   status: string;
   lat: number;
   long: number;
 }
-// 4. Interface para o retorno completo do GET /vehicles
-export interface VehicleListResponse {
-  vehicles: {
-    id: number;
-    vehicle: string;
-    volumetotal: number;
-    connected: number;
-    softwareUpdates: number;
-    img: string;
-    model_name: string;
-  }[];
-}
 
 // ======================================================================
-
 
 @Injectable({ providedIn: 'root' })
 export class VehicleService {
   private apiBase = 'http://localhost:3001';
-  private apiVehicle = `${this.apiBase}/vehicle`;
+  
+  // Rotas conforme sua API Node.js
   private apiVehicles = `${this.apiBase}/vehicles`; 
   private apiVehicleData = `${this.apiBase}/vehicleData`; 
 
   constructor(private http: HttpClient) {}
 
-  // Busca a lista completa de veículos. O tipo de retorno é VehicleListResponse
+  // 1. Busca a lista para o Dropdown
   getModels(): Observable<VehicleListResponse> {
     return this.http.get<VehicleListResponse>(this.apiVehicles);
   }
 
-  // Busca os dados agregados para os cards de um modelo específico (GET)
-  getVehicleData(model: string): Observable<ModelData> {
-    return this.http.get<ModelData>(`${this.apiVehicle}/${model}`).pipe(
-      // 💡 CORREÇÃO: Usando 'map' para garantir que a URL da imagem seja absoluta.
-      map(data => {
-        if (data && data.image && !data.image.startsWith('http')) {
-          return {
-            ...data,
-            // Concatena a URL base da API com o caminho relativo da imagem
-            image: this.apiBase + data.image
-          };
-        }
-        return data;
+  // 2. Busca dados de um modelo específico
+  // OBS: Como sua API não tem rota '/vehicle/:nome', buscamos todos e filtramos aqui.
+  getVehicleData(modelName: string): Observable<ApiVehicle | undefined> {
+    return this.http.get<VehicleListResponse>(this.apiVehicles).pipe(
+      map(response => {
+        // Encontra o veículo dentro do array retornado pela API
+        const found = response.vehicles.find(v => v.vehicle === modelName);
+        return found;
       })
     );
   }
 
-  // Busca o detalhe de um veículo pelo código VIN (POST)
-  searchVehicle(code: string): Observable<VehicleDetail | null> {
-    return this.http.post<VehicleDetail | null>(this.apiVehicleData, { vin: code });
+  // 3. Busca o detalhe pelo VIN (POST)
+  searchVehicle(code: string): Observable<VehicleDetail> {
+    // Sua API espera { "vin": "..." } no corpo da requisição
+    return this.http.post<VehicleDetail>(this.apiVehicleData, { vin: code });
   }
 
-  // Método de Login
+  // 4. Login
   login(user: string, pass: string): Observable<any> {
     return this.http.post<any>(`${this.apiBase}/login`, { nome: user, senha: pass });
   }

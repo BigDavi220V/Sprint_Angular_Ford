@@ -3,258 +3,252 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 
 :host {
-    font-family: 'Inter', sans-serif;
-    display: block;
+  font-family: 'Inter', sans-serif;
+  display: block;
 }
 
 /* 2. LAYOUT PRINCIPAL */
 .dashboard-container {
-    width: 100%;
-    min-height: 100vh;
-    background: url('/ArquivosDeSuporteDesafioAngular/img/plano_de_fundo.jpeg') no-repeat center center/cover;
-    padding: 20px;
-    box-sizing: border-box;
-    color: #ffffff;
-    background-color: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  min-height: 100vh;
+  /* ATENÇÃO: Verifique se a imagem está em src/assets/plano_de_fundo.jpeg */
+  background: url('/ArquivosDeSuporteDesafioAngular/img/plano_de_fundo.jpeg') no-repeat center center/cover;
+  padding: 20px;
+  box-sizing: border-box;
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Propriedade extra para garantir que a cor escura misture com a imagem */
+  background-blend-mode: overlay; 
 }
 
 /* Barra Superior */
 .top-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
 }
 
 .logo {
-    width: 120px;
-    height: auto;
+  width: 120px;
+  height: auto;
 }
 
 /* Botão de Logout */
 .logout {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    color: #fff;
-    padding: 8px 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
 .logout:hover {
-    background: #4A90E2;
-    border-color: #4A90E2;
+  background: #4A90E2;
+  border-color: #4A90E2;
 }
 
 /* Caixa do Dashboard (Conteúdo Central) */
 .dashboard-box {
-    width: 95%;
-    max-width: 1200px;
-    margin: 30px auto;
-    background: rgba(0, 0, 0, 0.65);
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  width: 95%;
+  max-width: 1200px;
+  margin: 30px auto;
+  background: rgba(0, 0, 0, 0.65);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
 }
 
 .dashboard-box h2 {
-    font-size: 28px;
-    font-weight: 700;
-    margin-bottom: 30px;
-    color: #4A90E2;
-    text-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: #4A90E2;
+  text-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
 }
 
 /* 3. LINHA DE CARDS E RESPONSIVIDADE */
 
 .card-row {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 25px;
-    flex-wrap: wrap;
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
 }
 
 .card {
-    background: rgba(255, 255, 255, 0.15);
-    padding: 20px;
-    border-radius: 12px;
-    flex: 1 1 200px;
-    text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.15);
+  padding: 20px;
+  border-radius: 12px;
+  flex: 1 1 200px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .search-card {
-    flex: 1 1 300px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+  flex: 1 1 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .card h3 {
-    font-size: 16px;
-    color: #ccc;
-    margin-bottom: 5px;
-    font-weight: 400;
+  font-size: 16px;
+  color: #ccc;
+  margin-bottom: 5px;
+  font-weight: 400;
 }
 
 .card p {
-    font-size: 32px;
-    font-weight: 700;
-    color: #fff;
+  font-size: 32px;
+  font-weight: 700;
+  color: #fff;
 }
 
 /* 4. CONTROLES DE FORMULÁRIO (INPUT/SELECT) */
 
 .search-card label {
-    font-size: 14px;
-    margin-bottom: 5px;
-    font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 5px;
+  font-weight: 600;
 }
 
 .search-card select,
 .search-table input {
-    width: 100%;
-    padding: 10px 12px;
-    border-radius: 6px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    background: rgba(0, 0, 0, 0.7);
-    color: #fff;
-    font-size: 15px;
-    box-sizing: border-box;
-    appearance: none;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  font-size: 15px;
+  box-sizing: border-box;
+  appearance: none;
 }
 
 .search-card select:focus,
 .search-table input:focus {
-    outline: none;
-    border-color: #4A90E2;
-    box-shadow: 0 0 5px #4A90E2;
+  outline: none;
+  border-color: #4A90E2;
+  box-shadow: 0 0 5px #4A90E2;
 }
 
-/* 5. IMAGEM DO VEÍCULO - MODIFICADO PARA ALTURA FIXA */
+/* 5. IMAGEM DO VEÍCULO */
 
 .vehicle-img-box {
-    text-align: center;
-    margin: 20px auto; /* Centraliza o contêiner da imagem */
-    padding: 10px;
-    /* >>> MODIFICAÇÕES AQUI: Define uma altura fixa para o contêiner */
-    width: 100%;
-    max-width: 470px; /* Mantém uma largura máxima (450px + padding) */
-    height: 250px; /* ALTURA FIXA */
-    /* FIM DAS MODIFICAÇÕES */
+  text-align: center;
+  margin: 20px auto; 
+  padding: 10px;
+  width: 100%;
+  max-width: 470px; 
+  height: 250px; /* ALTURA FIXA */
 }
 
 .vehicle-img {
-    /* Ajusta a imagem para preencher o contêiner fixo */
-    width: 100%;
-    height: 100%;
-    max-width: none; /* Deixa o contêiner definir a largura máxima */
-    /* ESSENCIAL: Garante que a imagem se ajuste ao contêiner, mantendo o aspecto */
-    object-fit: contain; 
-    
-    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5)); /* Sombra ajustada */
-    transition: transform 0.3s ease;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: contain; 
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5)); 
+  transition: transform 0.3s ease;
 }
 
 .vehicle-img:hover {
-    transform: scale(1.02);
+  transform: scale(1.02);
 }
 
 /* 6. TABELA E BUSCA */
 
 .table-card {
-    margin-top: 30px;
-    overflow-x: auto;
+  margin-top: 30px;
+  overflow-x: auto;
 }
 
 .search-table {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
 .search-table input {
-    flex: 1;
+  flex: 1;
 }
 
 .search-table button {
-    padding: 10px 18px;
-    border: none;
-    border-radius: 6px;
-    background-color: #4A90E2;
-    color: white;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  background-color: #4A90E2;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .search-table button:hover {
-    background-color: #357ABD;
+  background-color: #357ABD;
 }
 
 /* Estilos da Tabela */
 table {
-    width: 100%;
-    border-collapse: collapse;
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: 8px;
-    overflow: hidden;
-    min-width: 600px;
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  overflow: hidden;
+  min-width: 600px;
 }
 
 th, td {
-    padding: 14px 12px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-    text-align: left;
+  padding: 14px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  text-align: left;
 }
 
 th {
-    background: rgba(74, 144, 226, 0.2);
-    font-weight: 600;
-    color: #4A90E2;
-    text-transform: uppercase;
-    font-size: 12px;
+  background: rgba(74, 144, 226, 0.2);
+  font-weight: 600;
+  color: #4A90E2;
+  text-transform: uppercase;
+  font-size: 12px;
 }
 
 tbody tr:last-child td {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 /* 7. RESPONSIVIDADE PARA MOBILE */
 
 @media (max-width: 768px) {
-    .dashboard-box {
-        width: 100%;
-        padding: 20px;
-        margin: 20px auto;
-    }
+  .dashboard-box {
+    width: 100%;
+    padding: 20px;
+    margin: 20px auto;
+  }
 
-    .card-row {
-        flex-direction: column;
-        gap: 15px;
-    }
+  .card-row {
+    flex-direction: column;
+    gap: 15px;
+  }
 
-    .card, .search-card {
-        flex: 1 1 100%;
-    }
-    
-    /* >>> MODIFICAÇÕES AQUI: Altura fixa para o contêiner da imagem em mobile */
-    .vehicle-img-box {
-        max-width: 320px; /* Largura máxima menor para mobile */
-        height: 180px; /* ALTURA FIXA MENOR PARA MOBILE */
-    }
-    
-    /* Remove a regra redundante, pois o .vehicle-img já é 100% da altura e largura */
-    /* .vehicle-img { max-width: 300px; } */ 
+  .card, .search-card {
+    flex: 1 1 100%;
+  }
+  
+  .vehicle-img-box {
+    max-width: 320px; 
+    height: 180px; 
+  }
+  
+  .search-table {
+    flex-direction: column;
+  }
 
-    .search-table {
-        flex-direction: column;
-    }
-
-    .search-table button {
-        width: 100%;
-    }
+  .search-table button {
+    width: 100%;
+  }
 }

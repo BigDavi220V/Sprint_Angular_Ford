@@ -6,31 +6,31 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { 
   VehicleService, 
-  ModelSummary, 
-  ModelData, 
+  ApiVehicle, 
   VehicleDetail 
-} from '../../service/vehicle.service'
-
+} from '../../service/vehicle.service';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  // 💡 IMPORTS ESSENCIAIS: FormsModule para [(ngModel)] e CommonModule para *ngFor, *ngIf.
   imports: [FormsModule, CommonModule], 
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
 
-  // Propriedades tipadas corretamente
-  models: ModelSummary[] = [];
+  // Lista simples de strings para o dropdown
+  modelNames: string[] = []; 
+  
   selectedModel: string = '';
-  modelData: ModelData | null = null; 
+  
+  // Dados do Card Principal (Dados do modelo)
+  modelData: ApiVehicle | null = null; 
 
+  // Dados da busca por VIN
   searchCodeInput: string = '';
   vehicleDetail: VehicleDetail | null = null; 
   
-  // Injeção do Service e Router
   constructor(private api: VehicleService, private router: Router) {}
 
   ngOnInit() {
@@ -40,8 +40,9 @@ export class DashboardComponent implements OnInit {
   loadModels() {
     this.api.getModels().subscribe({
       next: (res) => {
-        // 💡 Lógica correta para o Dropdown: Mapeia o array 'vehicles' do objeto de resposta
-        this.models = res.vehicles.map(v => ({ model: v.model_name }));
+        // A API retorna { vehicles: [...] }. Mapeamos para pegar só os nomes.
+        // Propriedade da API é 'vehicle', não 'model_name'
+        this.modelNames = res.vehicles.map(v => v.vehicle);
       },
       error: (err) => {
         console.error("Erro ao carregar modelos:", err);
@@ -49,29 +50,25 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  // Método chamado quando o modelo no dropdown muda
   changeModel() {
     this.vehicleDetail = null; 
     this.searchCodeInput = '';
+    this.modelData = null;
 
-    if (!this.selectedModel) {
-      this.modelData = null; 
-      return;
-    }
+    if (!this.selectedModel) return;
 
     this.api.getVehicleData(this.selectedModel).subscribe({
-      next: (res) => {
-         // O service já corrigiu o caminho da imagem
-        this.modelData = res;
+      next: (data) => {
+        if(data) {
+          this.modelData = data;
+        }
       },
-       error: (err) => {
+      error: (err) => {
         console.error(`Erro ao carregar dados do modelo ${this.selectedModel}:`, err);
-        this.modelData = null;
       }
     });
   }
 
-  // Método chamado ao clicar em "Buscar" VIN
   searchCode() {
     this.vehicleDetail = null; 
 
@@ -82,15 +79,15 @@ export class DashboardComponent implements OnInit {
         this.vehicleDetail = res;
       },
       error: (err) => {
-        console.error("Erro ao buscar VIN:", err);
+        console.error("Erro ao buscar VIN ou VIN não encontrado:", err);
+        alert("VIN não encontrado ou erro no servidor");
         this.vehicleDetail = null;
       }
     });
   }
   
-  // Método de Logout implementado
   Logout(): void{
     localStorage.removeItem('usuarioLogado'); 
-    this.router.navigate(['/']);
+    this.router.navigate(['/login']); // Certifique-se que a rota é '/login'
   }
 }
