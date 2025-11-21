@@ -8,7 +8,7 @@ export const routes: Routes = [
     loadComponent:()=>
       import('./pages/login/login.component').then(m=> m.LoginComponent),
     // 💡 Aplica o unauthGuard: Se já estiver logado, não pode voltar para o login.
-    canActivate: [unauthGuard] 
+   
   },
 
   {
