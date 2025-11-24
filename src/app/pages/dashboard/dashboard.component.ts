@@ -1,5 +1,3 @@
-// src/app/pages/dashboard/dashboard.component.ts
-
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -40,8 +38,7 @@ export class DashboardComponent implements OnInit {
   loadModels() {
     this.api.getModels().subscribe({
       next: (res) => {
-        // A API retorna { vehicles: [...] }. Mapeamos para pegar só os nomes.
-        // Propriedade da API é 'vehicle', não 'model_name'
+        
         this.modelNames = res.vehicles.map(v => v.vehicle);
       },
       error: (err) => {
@@ -88,6 +85,6 @@ export class DashboardComponent implements OnInit {
   
   Logout(): void{
     localStorage.removeItem('usuarioLogado'); 
-    this.router.navigate(['/']); // Certifique-se que a rota é '/login'
+    this.router.navigate(['/']);
   }
 }

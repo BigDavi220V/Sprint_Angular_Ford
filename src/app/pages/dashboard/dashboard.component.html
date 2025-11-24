@@ -1,7 +1,7 @@
 <div class="dashboard-container">
 
   <div class="top-bar">
-    <!-- DICA: Certifique-se que esta imagem está na pasta assets do Angular -->
+   
     <img src="/ArquivosDeSuporteDesafioAngular/img/ford.png" class="logo" alt="Ford Logo"/>
     <button (click)="Logout()" class="logout">Logout</button>
   </div>
@@ -12,49 +12,46 @@
 
     <div class="card-row">
 
-      <!-- CARD DE SELEÇÃO -->
+      
       <div class="card search-card">
         <label>Veículo</label>
         <select [(ngModel)]="selectedModel" (change)="changeModel()">
           <option value="">Selecione...</option>
-          <!-- 
-             Ajuste: O TS agora retorna uma lista de nomes (strings), 
-             então usamos 'm' direto em vez de 'm.model' 
-          -->
+         
           <option *ngFor="let m of modelNames" [value]="m">{{ m }}</option>
         </select>
       </div>
 
-      <!-- CARD DE VENDAS -->
+     
       <div class="card">
         <h3>Total de vendas</h3>
-        <!-- Ajuste: API retorna 'volumetotal' -->
+        
         <p>{{ modelData?.volumetotal || 0 }}</p>
       </div>
 
-      <!-- CARD CONECTADOS -->
+      
       <div class="card">
         <h3>Conectados</h3>
-        <!-- 'connected' é igual na API e no Front -->
+        
         <p>{{ modelData?.connected || 0 }}</p>
       </div>
 
-      <!-- CARD UPDATE -->
+      
       <div class="card">
         <h3>Update Software</h3>
-        <!-- Ajuste: API retorna 'softwareUpdates' -->
+        
         <p>{{ modelData?.softwareUpdates || 0 }}</p>
       </div>
 
     </div>
 
-    <!-- IMAGEM DO VEÍCULO -->
+    
     <div class="vehicle-img-box">
-      <!-- Ajuste: API retorna 'img' -->
+     
       <img *ngIf="modelData" [src]="modelData.img" class="vehicle-img"/>
     </div>
 
-    <!-- TABELA -->
+    
     <div class="table-card">
       <div class="search-table">
         <input placeholder="Buscar por código..." [(ngModel)]="searchCodeInput"/>
@@ -74,13 +71,10 @@
 
         <tbody>
           <tr *ngIf="vehicleDetail">
-            <!-- 
-               Ajuste: A API não devolve o código VIN na resposta, retorna um ID.
-               Para manter o layout, mostramos o que o usuário digitou.
-            -->
+           
             <td>{{ searchCodeInput }}</td>
             
-            <!-- Ajuste: API retorna 'odometro' (em português) -->
+            
             <td>{{ vehicleDetail.odometro }}</td>
             
             <td>{{ vehicleDetail.status }}</td>

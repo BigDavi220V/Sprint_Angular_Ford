@@ -2,21 +2,21 @@
   position: relative;
   width: 100%;
   height: 100vh;
-  /* Fundo ocupando toda a tela */
+ 
   background: url('/ArquivosDeSuporteDesafioAngular/img/plano_de_fundo.jpeg') no-repeat center center/cover;
   
-  /* CENTRALIZAÇÃO HORIZONTAL E VERTICAL */
+  
   display: flex;
-  align-items: center; /* Centraliza verticalmente */
-  justify-content: center; /* Centraliza horizontalmente */
-  gap: 80px; /* Adiciona espaçamento entre o conteúdo e o carro */
+  align-items: center; 
+  justify-content: center; 
+  gap: 80px; 
 
-  padding: 0 40px; /* Remove o padding grande e centraliza */
+  padding: 0 40px; 
   box-sizing: border-box;
   color: #fff;
 }
 
-/* LOGO FORD (MANTÉM O POSICIONAMENTO ABSOLUTO NOS CANTOS) */
+
 .logo {
   position: absolute;
   top: 30px;
@@ -24,9 +24,9 @@
   width: 160px;
 }
 
-/* TEXTO CENTRAL */
+
 .content {
-  max-width: 400px; /* Reduzi o max-width para dar mais espaço de centralização */
+  max-width: 400px;
   text-align: left;
 }
 
@@ -41,7 +41,7 @@ p {
   margin-bottom: 30px;
 }
 
-/* BOTÕES */
+
 .buttons {
   display: flex;
   gap: 20px;
@@ -76,33 +76,33 @@ p {
   background: rgba(255,255,255,0.25);
 }
 
-/* IMAGEM DO VEÍCULO */
+
 .car-image {
   width: 520px;
   height: auto;
   user-select: none;
 }
 
-/* RESPONSIVO (Ajustado para centralizar e empilhar em telas menores) */
+
 @media (max-width: 1024px) {
   .welcome-container {
     flex-direction: column;
     text-align: center;
     padding: 40px;
-    gap: 30px; /* Reduz o espaçamento no modo coluna */
+    gap: 30px; 
   }
 
   .content {
     max-width: 100%;
   }
 
-  /* Centraliza botões em telas menores */
+  
   .buttons {
     justify-content: center; 
   }
 
   .car-image {
-    margin-top: 0; /* Remove a margem superior desnecessária no modo coluna */
+    margin-top: 0;
     width: 380px;
   }
 }

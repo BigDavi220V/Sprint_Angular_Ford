@@ -5,15 +5,15 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { Router } from '@angular/router';
 
 interface Usuario {
-  nome: string; // Alterado de 'name' para manter consistência se quiser usar no cadastro
-  login: string; // O antigo 'email' agora é o login/nome de usuário
+  nome: string; 
+  login: string; 
   password: string;
 }
 
 @Component({
   selector: 'app-auth',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, CommonModule, HttpClientModule], // Adicionado HttpClientModule
+  imports: [FormsModule, ReactiveFormsModule, CommonModule, HttpClientModule], 
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private http: HttpClient // Injeção do HttpClient
+    private http: HttpClient 
   ) {}
 
   ngOnInit(): void {
@@ -33,10 +33,9 @@ export class LoginComponent implements OnInit {
 
   setupForm(): void {
     this.form = this.fb.group({
-      // 'nome' aqui representa o Nome Completo (usado apenas no cadastro visualmente)
+      
       name: [''], 
-      // 'login' é o campo que a API espera como 'nome'. 
-      // Removi Validators.email pois a API exige o usuário "admin"
+     
       login: ['', [Validators.required]], 
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
